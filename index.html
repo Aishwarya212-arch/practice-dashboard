@@ -1,0 +1,101 @@
+
+<h2 class="sr-only">Practice sales dashboard with key metrics, regional breakdown, and monthly revenue chart</h2>
+
+<div style="padding: 1rem 0">
+  <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0 0 1.5rem;">Internship Practice Dashboard · Q2 2026</p>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 1.5rem;">
+    <div style="background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 1rem;">
+      <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0 0 4px;">Total revenue</p>
+      <p style="font-size: 22px; font-weight: 500; margin: 0;">$284,500</p>
+    </div>
+    <div style="background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 1rem;">
+      <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0 0 4px;">Deals closed</p>
+      <p style="font-size: 22px; font-weight: 500; margin: 0;">142</p>
+    </div>
+    <div style="background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 1rem;">
+      <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0 0 4px;">Win rate</p>
+      <p style="font-size: 22px; font-weight: 500; margin: 0;">38%</p>
+    </div>
+    <div style="background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 1rem;">
+      <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0 0 4px;">Avg deal size</p>
+      <p style="font-size: 22px; font-weight: 500; margin: 0;">$2,003</p>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+    <div style="background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem;">
+      <p style="font-size: 14px; font-weight: 500; margin: 0 0 1rem;">Monthly revenue</p>
+      <canvas id="revenueChart" height="180"></canvas>
+    </div>
+
+    <div style="background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem;">
+      <p style="font-size: 14px; font-weight: 500; margin: 0 0 1rem;">Sales by region</p>
+      <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+        <div>
+          <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px;">
+            <span style="color: var(--color-text-secondary);">North</span><span style="font-weight: 500;">$98,200</span>
+          </div>
+          <div style="height: 6px; background: var(--color-background-secondary); border-radius: 3px;">
+            <div style="height: 6px; width: 69%; background: #185FA5; border-radius: 3px;"></div>
+          </div>
+        </div>
+        <div>
+          <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px;">
+            <span style="color: var(--color-text-secondary);">South</span><span style="font-weight: 500;">$74,100</span>
+          </div>
+          <div style="height: 6px; background: var(--color-background-secondary); border-radius: 3px;">
+            <div style="height: 6px; width: 52%; background: #185FA5; border-radius: 3px;"></div>
+          </div>
+        </div>
+        <div>
+          <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px;">
+            <span style="color: var(--color-text-secondary);">East</span><span style="font-weight: 500;">$63,800</span>
+          </div>
+          <div style="height: 6px; background: var(--color-background-secondary); border-radius: 3px;">
+            <div style="height: 6px; width: 45%; background: #185FA5; border-radius: 3px;"></div>
+          </div>
+        </div>
+        <div>
+          <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px;">
+            <span style="color: var(--color-text-secondary);">West</span><span style="font-weight: 500;">$48,400</span>
+          </div>
+          <div style="height: 6px; background: var(--color-background-secondary); border-radius: 3px;">
+            <div style="height: 6px; width: 34%; background: #185FA5; border-radius: 3px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+const ctx = document.getElementById('revenueChart').getContext('2d');
+new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: ['Jan','Feb','Mar','Apr','May','Jun'],
+    datasets: [{
+      data: [38000, 42000, 45000, 51000, 53000, 55500],
+      backgroundColor: '#378ADD',
+      borderRadius: 4,
+      borderSkipped: false
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { grid: { display: false }, ticks: { font: { size: 11 } } },
+      y: {
+        grid: { color: 'rgba(0,0,0,0.05)' },
+        ticks: {
+          font: { size: 11 },
+          callback: v => '$' + (v/1000).toFixed(0) + 'k'
+        }
+      }
+    }
+  }
+});
+</script>
