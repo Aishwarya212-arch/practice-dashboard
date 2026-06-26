@@ -17,5 +17,5 @@ jobs:
       - name: Deploy
         run: |
           swa deploy . \
-            --deployment-token ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }} \
+            --deployment-token ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN}} \
             --env production
